@@ -51,6 +51,7 @@ pipeline {
                 sh '''
                     git config user.email "mnajalouey11@gmail.com"
                     git config user.name "louey"
+                    git pull https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} main --rebase
                     sed -i "s/tag: .*/tag: \"${build_version}\"/" helm/app/values.yaml
                     git add helm/app/values.yaml
                     git commit -m "Update deployment image to version ${build_version}"
